@@ -79,15 +79,10 @@ A complete full-stack e-commerce bookstore application built with React frontend
 
 ## Database Schema
 The application uses a relational database with the following key tables:
-- [book](cci:1://file:///Users/siddarthbandi/Desktop/SID/VT/WebDev/CS5244/SiddarthBookstoreReactTransact/server/src/main/java/api/ApiResource.java:47:4-57:5): Book information including title, author, price
-- [category](cci:1://file:///Users/siddarthbandi/Desktop/SID/VT/WebDev/CS5244/SiddarthBookstoreReactTransact/server/src/main/java/api/ApiResource.java:35:4-45:5): Book categories
+- Book information including title, author, price
+- Book categories
 - `customer`: Customer information
 - `customer_order`: Order information
 - `customer_order_line_item`: Line items for each order
 
-## Future Enhancements
-- User authentication and accounts
-- Book reviews and ratings
-- Advanced search functionality
-- Wish list feature
-- Admin dashboard for inventory management
+
