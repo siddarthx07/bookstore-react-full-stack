@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/SiddarthBookstoreReactTransact/static/css/main.0903127c.css",
+    "main.js": "/SiddarthBookstoreReactTransact/static/js/main.04dfac91.js",
+    "static/js/453.258b012d.chunk.js": "/SiddarthBookstoreReactTransact/static/js/453.258b012d.chunk.js",
+    "static/media/hero.jpg": "/SiddarthBookstoreReactTransact/static/media/hero.2db37b4d7298da0f20c0.jpg",
+    "static/media/verity.png": "/SiddarthBookstoreReactTransact/static/media/verity.bb5e76fff83eb754bf95.png",
+    "static/media/findingperfect.png": "/SiddarthBookstoreReactTransact/static/media/findingperfect.23960179c71e8415fa64.png",
+    "static/media/yourfault.png": "/SiddarthBookstoreReactTransact/static/media/yourfault.8e16e0ea56cf20c3cd72.png",
+    "static/media/twistedlies.png": "/SiddarthBookstoreReactTransact/static/media/twistedlies.01b0ca9027e9fc49e2e0.png",
+    "static/media/november9.png": "/SiddarthBookstoreReactTransact/static/media/november9.fe6df8fb5615eedc4c2a.png",
+    "static/media/twistedlove.png": "/SiddarthBookstoreReactTransact/static/media/twistedlove.a12a0fd36abe4e7f2a2c.png",
+    "static/media/kingofwrath.png": "/SiddarthBookstoreReactTransact/static/media/kingofwrath.d12ad49a9f6ad3ac85c5.png",
+    "static/media/daydream.png": "/SiddarthBookstoreReactTransact/static/media/daydream.51ee1afc4598368d5f51.png",
+    "static/media/thenameofthewind.jpg": "/SiddarthBookstoreReactTransact/static/media/thenameofthewind.3c70f39aad3f76011fe8.jpg",
+    "static/media/reminders.png": "/SiddarthBookstoreReactTransact/static/media/reminders.9e6587bdacd6df7ec714.png",
+    "static/media/remindersofhim.png": "/SiddarthBookstoreReactTransact/static/media/remindersofhim.9e6587bdacd6df7ec714.png",
+    "static/media/thefriendzone.png": "/SiddarthBookstoreReactTransact/static/media/thefriendzone.522fe3af245f49fb8617.png",
+    "static/media/mexicangothic.jpg": "/SiddarthBookstoreReactTransact/static/media/mexicangothic.dd786e801e4292a874e2.jpg",
+    "static/media/thewomaninthewindow.jpg": "/SiddarthBookstoreReactTransact/static/media/thewomaninthewindow.8e8ac0fe73aa29155e5a.jpg",
+    "static/media/theprioryoftheorangetree.jpg": "/SiddarthBookstoreReactTransact/static/media/theprioryoftheorangetree.06be88ce56b372d92d95.jpg",
+    "static/media/birdbox.jpg": "/SiddarthBookstoreReactTransact/static/media/birdbox.4639a62de141fa65974b.jpg",
+    "static/media/shadowandbone.jpg": "/SiddarthBookstoreReactTransact/static/media/shadowandbone.4ba3bd40e15a4019f999.jpg",
+    "static/media/thewayofkings.jpg": "/SiddarthBookstoreReactTransact/static/media/thewayofkings.a8bb618796404f6fc6c4.jpg",
+    "static/media/beforeigotosleep.jpg": "/SiddarthBookstoreReactTransact/static/media/beforeigotosleep.e5282136738d276faaaa.jpg",
+    "static/media/thegirlwiththedragontattoo.jpg": "/SiddarthBookstoreReactTransact/static/media/thegirlwiththedragontattoo.25151e52eee2ac5f5d48.jpg",
+    "static/media/houseofleaves.jpg": "/SiddarthBookstoreReactTransact/static/media/houseofleaves.1fb6ac64ac3a91bf7f05.jpg",
+    "static/media/acourtofthornsandroses.jpg": "/SiddarthBookstoreReactTransact/static/media/acourtofthornsandroses.d066996244188b84c6fd.jpg",
+    "static/media/thesilentpatient.jpg": "/SiddarthBookstoreReactTransact/static/media/thesilentpatient.e1c119d7c6a6862613ca.jpg",
+    "static/media/thechain.jpg": "/SiddarthBookstoreReactTransact/static/media/thechain.6fd65fb067780ba813f2.jpg",
+    "static/media/thriller.jpg": "/SiddarthBookstoreReactTransact/static/media/thriller.3eb59cfce62548ebfd19.jpg",
+    "static/media/theshining.jpg": "/SiddarthBookstoreReactTransact/static/media/theshining.3a6ee6f62541f73cdbcf.jpg",
+    "static/media/theexorcist.jpg": "/SiddarthBookstoreReactTransact/static/media/theexorcist.0012a92e61125aebb432.jpg",
+    "index.html": "/SiddarthBookstoreReactTransact/index.html",
+    "main.0903127c.css.map": "/SiddarthBookstoreReactTransact/static/css/main.0903127c.css.map",
+    "main.04dfac91.js.map": "/SiddarthBookstoreReactTransact/static/js/main.04dfac91.js.map",
+    "453.258b012d.chunk.js.map": "/SiddarthBookstoreReactTransact/static/js/453.258b012d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0903127c.css",
+    "static/js/main.04dfac91.js"
+  ]
+}

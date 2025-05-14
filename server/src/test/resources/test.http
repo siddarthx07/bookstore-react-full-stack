@@ -1,0 +1,463 @@
+# Get Categories - Replace with your bookstore name
+GET http://localhost:8080/SiddarthBookstoreReactTransact/api/categories
+Accept: application/json
+
+###
+# Valid Order - Should return 'Transactions have not been implemented yet' with 400 code
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [
+      {
+        "book": {
+          "bookId": 1001,
+          "title": "The Art of Computer Programming, Vol 1",
+          "author": "Donald Knuth",
+          "description": "",
+          "price": 24.99,
+          "rating": 0,
+          "isPublic": true,
+          "isFeatured": false,
+          "categoryId": 1001
+        },
+        "quantity": 1
+      }
+    ]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main Street",
+    "phone": "+1(408)555-12122",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# 1. Missing field tests
+
+# Missing name
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 24.99, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Missing address
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 24.99, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Missing phone
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Missing email
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Missing credit card number
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# 2. Empty fields tests
+
+# Empty name
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Empty address
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# 3. Invalid fields tests
+
+# Invalid name (too short)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 24.99, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Sid",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid name (too long)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "This is an extremely long name that exceeds the forty five character limit for validation testing purposes",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid address (too short)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid phone (not 10 digits)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-55",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid email (contains space)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth @email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid email (no @)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarthmail.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid email (ends with .)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid credit card (too short)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid expiration date (past month)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 4,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid expiration date (past year)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2024
+  }
+}
+
+###
+# 4. Cart validation tests
+
+# Empty cart
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": []
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid quantity (too high)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 2499, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 100}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid price (doesn't match database)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 1999, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1001}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
+# Invalid category (doesn't match database)
+POST http://localhost:8080/SiddarthBookstoreReactTransact/api/orders
+Content-Type: application/json
+
+{
+  "cart": {
+    "itemArray": [{"book": {"bookId": 1001, "title": "The Art of Computer Programming, Vol 1", "author": "Donald Knuth", "description": "", "price": 24.99, "rating": 0, "isPublic": true, "isFeatured": false, "categoryId": 1002}, "quantity": 1}]
+  },
+  "customerForm": {
+    "name": "Siddarth Bandi",
+    "address": "123 Main St",
+    "phone": "408-555-1212",
+    "email": "siddarth@email.com",
+    "ccNumber": "4444333322221111",
+    "ccExpiryMonth": 5,
+    "ccExpiryYear": 2025
+  }
+}
+
+###
