@@ -1,0 +1,19 @@
+/* Additional spacing for header components */
+.nav-controls {
+  gap: 40px !important;
+  padding-right: 20px !important;
+}
+
+.sign-in {
+  gap: 12px !important;
+  padding: 0 10px !important;
+}
+
+.cart-container {
+  padding: 0 10px !important;
+}
+
+/* Add spacing between header dropdown and other elements */
+.header-dropdown {
+  margin-right: 15px !important;
+}

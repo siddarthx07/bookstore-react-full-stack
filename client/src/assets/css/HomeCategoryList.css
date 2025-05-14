@@ -1,0 +1,118 @@
+.best-sellers__grid {
+    display: flex;
+    gap: 80px;
+    flex: 1;
+}
+
+
+/* Book Card */
+.book-card {
+    width: 176px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+/* Book Cover Image */
+.book-card__image {
+    width: 100%;
+    height: 200px;
+    aspect-ratio: 0.67;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Book Information */
+.book-card__info {
+    padding: 8px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+/* Book Title */
+.book-card__title {
+    text-align: center;
+    margin-bottom: 8px;
+    color: #1e2938;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    text-transform: capitalize;
+}
+
+/* Author Name */
+.book-card__author {
+    text-align: center;
+    margin-bottom: 8px;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+    font-style: italic;
+}
+
+/* Rating Section */
+.book-card__rating {
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.book-card__rating-label {
+    color: #000;
+    font: 500 14px "Inter", sans-serif;
+}
+
+.book-card__stars {
+    color: #e78625;
+}
+
+/* Book Price */
+.book-card__price {
+    color: #8B0000;
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+}
+
+/* Add to Cart Button */
+.book-card__add-to-cart {
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-left: 25px;
+    background-color: #2f4b79;
+    font: 600 14px "Inter", sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .best-sellers {
+        padding: 20px;
+    }
+    .best-sellers__grid {
+        gap: 40px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .best-sellers__grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    .book-card {
+        width: 100%;
+        max-width: 200px;
+    }
+}

@@ -1,0 +1,167 @@
+/* Book Card Container */
+.book-card {
+    width: 176px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Book Card Hover Effect */
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+/* Book Cover Image Container */
+.book-card__image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Book Cover Image */
+.book-card__image {
+    width: 170px;
+    height: 200px;
+    aspect-ratio: 0.67;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+}
+
+/* Read Now Button (Initially Hidden) */
+.book-card__read-now {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0c64f3;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    font: 600 14px "Inter", sans-serif;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Show Read Now Button on Hover */
+.book-card__image-container:hover .book-card__read-now {
+    opacity: 1;
+}
+
+/* Book Information Section */
+.book-card__info {
+    padding: 8px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+/* Book Title */
+.book-card__title {
+    text-align: center;
+    margin-bottom: 8px;
+    color: #1e2938;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    text-transform: capitalize;
+}
+
+/* Book Author */
+.book-card__author {
+    text-align: center;
+    margin-bottom: 8px;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+    font-style: italic;
+}
+
+/* Rating Section */
+.book-card__rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+/* Rating Label */
+.book-card__rating-label {
+    color: #000;
+    font: 500 14px "Inter", sans-serif;
+}
+
+/* Star Rating Color */
+.book-card__stars {
+    color: #e78625;
+}
+
+/* Book Price */
+.book-card__price {
+    color: #8B0000;
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+}
+
+/* Add to Cart Button */
+.book-card__add-to-cart {
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-left: 25px;
+    margin-bottom: 8px;
+    background-color: #2f4b79;
+    font: 600 14px "Inter", sans-serif;
+    border: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+/* Add to Cart Button Hover */
+.book-card__add-to-cart:hover {
+    background-color: #1c3757;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .book-card {
+        width: 160px;
+    }
+    .book-card__title {
+        font-size: 16px;
+    }
+    .book-card__price {
+        font-size: 14px;
+    }
+    .book-card__add-to-cart {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 640px) {
+    .book-card {
+        width: 140px;
+    }
+    .book-card__title {
+        font-size: 14px;
+    }
+    .book-card__rating-label {
+        font-size: 12px;
+    }
+}
