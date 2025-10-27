@@ -1,0 +1,10 @@
+# Railway ignore file
+# Files and directories to exclude from Railway deployment
+
+.git/
+.idea/
+*.zip
+client/node_modules/
+*.iml
+.DS_Store
+

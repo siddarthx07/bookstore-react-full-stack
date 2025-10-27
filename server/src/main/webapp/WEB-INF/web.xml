@@ -29,5 +29,10 @@
     </servlet-mapping>
 
     <!-- Add more servlet mappings for other routes as needed -->
+    
+    <!-- Listener for database initialization -->
+    <listener>
+        <listener-class>api.DatabaseInitializer</listener-class>
+    </listener>
 
 </web-app>
