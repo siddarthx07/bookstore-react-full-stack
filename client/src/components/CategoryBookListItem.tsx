@@ -95,12 +95,16 @@ function CategoryBookListItem({ bookId, title, author, price, rating, categoryId
         }, 300);
     };
   const imageKey = title.toLowerCase().replace(/\s+/g, '');
+  const rawSrc = bookImages[imageKey] ?? daydream;
+  const imageSrc = rawSrc
+    ? rawSrc.startsWith('/') ? rawSrc : `/${rawSrc.replace(/^\//, '')}`
+    : '/static/media/default-book-cover.jpg';
   
   return (
     <article className="book-card" key={bookId}>
       <div className="book-card__image-container">
         <img 
-          src={bookImages[imageKey]}
+          src={imageSrc}
           alt={`Cover of ${title}`} 
           className="book-card__image" 
         />

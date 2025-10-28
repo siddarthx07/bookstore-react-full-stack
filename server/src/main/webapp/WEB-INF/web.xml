@@ -12,9 +12,22 @@
         <location>/index.html</location>
     </error-page>
 
-    <!-- 404s fall back to index.html to support SPA routing -->
+    <!-- This configuration ensures that all requests are handled by index.html -->
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <jsp-file>/index.html</jsp-file>
+    </servlet>
 
-    <listener>
-        <listener-class>api.DatabaseInitializer</listener-class>
-    </listener>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/category/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
+    <!-- Add more servlet mappings for other routes as needed -->
+
 </web-app>
