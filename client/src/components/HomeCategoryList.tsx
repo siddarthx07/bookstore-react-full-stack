@@ -2,10 +2,9 @@ import '../assets/css/HomeCategoryList.css';
 import '../assets/css/BookCard.css';
 import '../assets/css/BookGrid.css';
 import '../assets/css/HomeBookCard.css';
-import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { BookItem } from '../types';
-import { Category } from '../contexts/CategoryContext';
+import apiClient from '../apiClient';
 
 // Pre-import book images
 import twistedLove from '../assets/images/books/twistedlove.png';
@@ -31,7 +30,6 @@ const bookImages: { [key: string]: string } = {
 
 
 function HomeCategoryList() {
-  const categories = useContext(Category);
   const [books, setBooks] = useState<BookItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +41,7 @@ function HomeCategoryList() {
       try {
         setLoading(true);
         setError(null);
-        const result = await axios.get('/SiddarthBookstoreReactTransact/api/categories/name/romance/books');
+        const result = await apiClient.get('/categories/name/romance/books');
         if (mounted) {
           setBooks(result.data as BookItem[]);
           setLoading(false);

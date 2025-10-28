@@ -11,8 +11,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  createBrowserRouter,
-  RouterProvider,
 } from "react-router-dom"
 
 
@@ -27,7 +25,7 @@ function App() {
   return (
     <CategorySearchProvider>
       <OrderDetailsProvider>
-      <Router basename="/SiddarthBookstoreReactTransact">
+      <Router>
         <Routes>
           <Route element={<AppLayout />}> 
             <Route path="/" element={<Home />} />
@@ -47,4 +45,3 @@ function App() {
 }
 
 export default App;
-

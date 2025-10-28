@@ -1,9 +1,18 @@
 [phases.setup]
-nixPkgs = ["jdk17", "gradle"]
+nixPkgs = ["jdk17", "gradle", "nodejs_18"]
+
+[phases.install]
+cmds = [
+  "cd client && npm ci"
+]
 
 [phases.build]
-cmds = ["cd server && chmod +x gradlew && ./gradlew clean build jar -x test"]
+cmds = [
+  "cd client && npm run build",
+  "find server/src/main/webapp -mindepth 1 -maxdepth 1 ! -name 'WEB-INF' ! -name 'META-INF' -exec rm -rf {} +",
+  "cp -r client/build/. server/src/main/webapp/",
+  "cd server && chmod +x gradlew && ./gradlew clean build -x test"
+]
 
 [start]
-cmd = "java -jar server/build/libs/server-1.0-SNAPSHOT.jar"
-
+cmd = "java -jar server/build/libs/server.jar"

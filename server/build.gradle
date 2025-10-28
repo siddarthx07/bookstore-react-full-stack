@@ -75,5 +75,10 @@ jar {
   }
   from {
     configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+  } {
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', '**/module-info.class', 'META-INF/versions/**'
+  }
+  from('src/main/webapp') {
+    into 'webapp'
   }
 }
