@@ -13,4 +13,8 @@
     </error-page>
 
     <!-- 404s fall back to index.html to support SPA routing -->
+
+    <listener>
+        <listener-class>api.DatabaseInitializer</listener-class>
+    </listener>
 </web-app>
