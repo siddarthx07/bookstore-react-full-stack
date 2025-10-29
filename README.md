@@ -18,6 +18,7 @@ A complete full-stack e-commerce bookstore application built with React frontend
 - **Interactive Animations**: Header controls, best-seller highlights, category grids, and confirmations feature subtle motion for a modern, polished feel
 - **Visual Feedback**: Toast notifications on cart actions, animated auth flows, and celebratory order confirmations keep users informed and delighted
 - **Centralized Book Imagery**: Shared image catalog ensures every book detail and listing view consistently renders the correct cover art
+- **Immersive Book Detail View**: Surface rich metadata (rating, availability, price, category) alongside a dynamic cover, quantity controls, upsell highlights, and add-to-cart confirmation to streamline the purchase journey
 
 ## Technology Stack
 
