@@ -15,6 +15,9 @@ A complete full-stack e-commerce bookstore application built with React frontend
 - **Order Management**: Process orders with secure transaction handling
 - **Order Confirmation**: Receive detailed order confirmation with masked credit card information
 - **Responsive Design**: Optimized for both desktop and mobile devices
+- **Interactive Animations**: Header controls, best-seller highlights, category grids, and confirmations feature subtle motion for a modern, polished feel
+- **Visual Feedback**: Toast notifications on cart actions, animated auth flows, and celebratory order confirmations keep users informed and delighted
+- **Centralized Book Imagery**: Shared image catalog ensures every book detail and listing view consistently renders the correct cover art
 
 ## Technology Stack
 
