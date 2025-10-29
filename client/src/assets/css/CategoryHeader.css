@@ -128,11 +128,21 @@
     text-decoration: none;
     position: relative;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.22);
+    backdrop-filter: blur(6px);
   }
-  .category-link:hover,
+  .category-link:hover {
+    border-color: rgba(255,255,255,0.28);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+  }
+
   .dropdown-menu a:hover {
     cursor: pointer;
   }
