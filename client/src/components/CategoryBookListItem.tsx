@@ -1,5 +1,5 @@
 import '../assets/css/CategoryBookListItem.css';
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CartStore } from '../contexts/CartContext';
 import { CartTypes } from '../reducers/CartReducer';
@@ -74,6 +74,7 @@ type BookItemProps = {
 
 function CategoryBookListItem({ bookId, title, author, price, rating, categoryId }: BookItemProps) {
     const { dispatch } = useContext(CartStore);
+    const [showToast, setShowToast] = useState(false);
     
     const book = { 
         bookId, 
@@ -89,6 +90,7 @@ function CategoryBookListItem({ bookId, title, author, price, rating, categoryId
     
     // Add a ref to track if we're currently processing a click
     const isAddingRef = useRef(false);
+    const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     
     const addBookToCart = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -97,14 +99,29 @@ function CategoryBookListItem({ bookId, title, author, price, rating, categoryId
         if (isAddingRef.current) return;
         
         isAddingRef.current = true;
-        console.log('Adding to cart:', book);
         dispatch({ type: CartTypes.ADD, item: book, id: book.bookId });
+
+        // Show toast feedback
+        setShowToast(true);
+        if (toastTimeoutRef.current) {
+            clearTimeout(toastTimeoutRef.current);
+        }
+        toastTimeoutRef.current = setTimeout(() => {
+            setShowToast(false);
+            toastTimeoutRef.current = null;
+        }, 2500);
         
         // Reset after a short delay
         setTimeout(() => {
             isAddingRef.current = false;
         }, 300);
     };
+    
+    useEffect(() => () => {
+        if (toastTimeoutRef.current) {
+            clearTimeout(toastTimeoutRef.current);
+        }
+    }, []);
   const imageKey = title.toLowerCase().replace(/\s+/g, '');
   const rawSrc = bookImages[imageKey] ?? daydream;
   const imageSrc = rawSrc
@@ -113,6 +130,11 @@ function CategoryBookListItem({ bookId, title, author, price, rating, categoryId
   
   return (
     <article className="book-card" key={bookId}>
+      {showToast && (
+        <div className="book-card__toast" role="status" aria-live="polite">
+          ✓ Added to cart
+        </div>
+      )}
       <div className="book-card__image-container">
         <img 
           src={imageSrc}

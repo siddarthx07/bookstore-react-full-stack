@@ -65,29 +65,23 @@
 }
 
 /* Success Toast */
-.success-toast {
-  position: fixed;
-  top: 120px;
-  right: 20px;
-  background-color: #28a745;
+.book-detail-toast {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translate(-50%, -10px);
+  background: linear-gradient(135deg, #0c64f3, #315bff);
   color: white;
-  padding: 15px 25px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  animation: slideIn 0.3s ease-out;
-  font-weight: 600;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(400px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  padding: 8px 18px;
+  border-radius: 999px;
+  box-shadow: 0 16px 26px -18px rgba(12, 100, 243, 0.75);
+  z-index: 2;
+  font: 600 0.85rem "Inter", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: toastPop 2.4s ease forwards;
 }
 
 @keyframes detailCardEnter {
@@ -124,6 +118,25 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes toastPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -10px) scale(0.92);
+  }
+  12% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.02);
+  }
+  85% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -8px) scale(0.96);
   }
 }
 

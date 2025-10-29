@@ -121,14 +121,14 @@ function BookDetail() {
         <span className="breadcrumb-current">{book.title}</span>
       </nav>
 
-      {/* Success Message */}
-      {addedToCart && (
-        <div className="success-toast">
-          ✓ Added to cart successfully!
-        </div>
-      )}
-
       <div className="book-detail-card">
+        {/* Success Message */}
+        {addedToCart && (
+          <div className="book-detail-toast" role="status" aria-live="polite">
+            ✓ Added to cart
+          </div>
+        )}
+
         {/* Main Content */}
         <div className="book-detail-content">
           {/* Left Column - Book Image */}
