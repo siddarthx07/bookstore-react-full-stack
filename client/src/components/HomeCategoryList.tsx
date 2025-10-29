@@ -2,36 +2,15 @@ import '../assets/css/HomeCategoryList.css';
 import '../assets/css/BookCard.css';
 import '../assets/css/BookGrid.css';
 import '../assets/css/HomeBookCard.css';
-import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { BookItem } from '../types';
-import { Category } from '../contexts/CategoryContext';
-
-// Pre-import book images
-import twistedLove from '../assets/images/books/twistedlove.png';
-import theFriendZone from '../assets/images/books/thefriendzone.png';
-import remindersOfHim from '../assets/images/books/remindersofhim.png';
-import november9 from '../assets/images/books/november9.png';
-import kingOfWrath from '../assets/images/books/kingofwrath.png';
-import twistedLies from '../assets/images/books/twistedlies.png';
-import yourFault from '../assets/images/books/yourfault.png';
-import findingPerfect from '../assets/images/books/findingperfect.png';
-
-const bookImages: { [key: string]: string } = {
-  'twistedlove': twistedLove,
-  'thefriendzone': theFriendZone,
-  'remindersofhim': remindersOfHim,
-  'november9': november9,
-  'kingofwrath': kingOfWrath,
-  'twistedlies': twistedLies,
-  'yourfault': yourFault,
-  'findingperfect': findingPerfect
-};
-
+import apiClient from '../apiClient';
+import bookImages from '../assets/bookImages';
+import daydream from '../assets/images/books/daydream.png';
 
 
 function HomeCategoryList() {
-  const categories = useContext(Category);
   const [books, setBooks] = useState<BookItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +22,7 @@ function HomeCategoryList() {
       try {
         setLoading(true);
         setError(null);
-        const result = await axios.get('/SiddarthBookstoreReactTransact/api/categories/name/romance/books');
+        const result = await apiClient.get('/categories/name/romance/books');
         if (mounted) {
           setBooks(result.data as BookItem[]);
           setLoading(false);
@@ -75,18 +54,20 @@ function HomeCategoryList() {
   return (
     <div className="best-sellers__grid">
       {books && books.slice(0, 4).map((book) => (
-        <article className="book-card" key={book.bookId}>
-          <div className="book-card__image-container">
-            <img 
-              src={bookImages[book.title.toLowerCase().replace(/\s+/g, '')] || `../assets/images/books/${book.title.toLowerCase().replace(/\s+/g, '')}.jpg`}
-              alt={`Cover of ${book.title}`} 
-              className="book-card__image" 
-            />
-          </div>
-          <div className="book-card__info">
-            <h3 className="book-card__title">{book.title}</h3>
-          </div>
-        </article>
+        <Link to={`/book/${book.bookId}`} key={book.bookId} className="book-card-link">
+          <article className="book-card">
+            <div className="book-card__image-container">
+              <img 
+                src={bookImages[book.title.toLowerCase().replace(/[^a-z0-9]/g, '')] ?? daydream}
+                alt={`Cover of ${book.title}`} 
+                className="book-card__image" 
+              />
+            </div>
+            <div className="book-card__info">
+              <h3 className="book-card__title">{book.title}</h3>
+            </div>
+          </article>
+        </Link>
       ))}
     </div>
   );

@@ -84,7 +84,7 @@ And update the API calls in the React app to use `process.env.REACT_APP_API_URL`
 
 **Option B: Configure frontend to be built with the backend (Current Implementation)**
 
-The current setup has the React app configured to be served by the Java backend at the context path `/SiddarthBookstoreReactTransact`.
+The current setup bundles the React app into the Java backend and serves it from the application root (`/`).
 
 ### 6. Build the Frontend
 
@@ -92,7 +92,7 @@ Before deploying, you need to build the React frontend:
 
 ```bash
 cd bookstore-react-full-stack/client
-npm install
+npm ci
 npm run build
 ```
 
@@ -104,7 +104,8 @@ The build output needs to be copied to the backend's webapp directory:
 
 ```bash
 cd bookstore-react-full-stack
-cp -r client/build/* server/src/main/webapp/
+find server/src/main/webapp -mindepth 1 -maxdepth 1 ! -name 'WEB-INF' ! -name 'META-INF' -exec rm -rf {} +
+cp -r client/build/. server/src/main/webapp/
 ```
 
 ## How the Application Works on Railway
@@ -166,7 +167,7 @@ If the app doesn't start:
 
 If the React app doesn't load:
 1. Verify the `client/build` folder is copied to `server/src/main/webapp`
-2. Check if the context path matches (`/SiddarthBookstoreReactTransact`)
+2. Confirm static assets are being served from the application root (`/`)
 3. Check browser console for 404 errors
 
 ## Railway-Specific Features
@@ -238,4 +239,3 @@ For production deployments:
 - Railway Docs: https://docs.railway.app
 - Railway Support: https://railway.app/help
 - GitHub Issues: Open an issue in the repository
-

@@ -1,0 +1,3 @@
+server/src/main/webapp/*
+!server/src/main/webapp/WEB-INF/
+!server/src/main/webapp/META-INF/

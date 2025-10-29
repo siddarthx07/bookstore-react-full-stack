@@ -69,9 +69,9 @@ public class CategoryDaoJdbc implements CategoryDao {
     @Override
     public Category findByCategoryName(String name) {
         Category category = null;
+        String sql = "SELECT category_id, name FROM category WHERE LOWER(name) = LOWER(?)";
         try (Connection connection = JdbcUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT category_id, name FROM category WHERE name = ?")) {
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, name);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {

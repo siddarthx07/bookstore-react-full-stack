@@ -1,17 +1,27 @@
 import { useContext } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import HeaderDropdown from './HeaderDropdown';
 import '../assets/css/global.css'
 import '../assets/css/AppHeader.css';
 import '../assets/css/HeaderSpacing.css';
-import { Link } from 'react-router-dom';
-import { Category } from '../contexts/CategoryContext';
 import { CartStore } from '../contexts/CartContext';
+import { useAuth } from '../contexts/AuthContext';
 
 function AppHeader() {
-  const categories = useContext(Category);
   const { cart } = useContext(CartStore);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const showSearch = location.pathname !== "/";
   
   const cartQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+  const firstName = user ? user.fullName.split(' ')[0] : '';
+
+  const handleSignOut = async () => {
+    await logout();
+    navigate('/');
+  };
+
 return(
 <header className="header">
     <div className="logo-container">
@@ -30,7 +40,8 @@ return(
             </div>
         </Link>
     </div>
-    <div className="search-container">
+    {showSearch ? (
+      <div className="search-container">
         <img 
             src={require('../assets/images/site/filter.png')} 
             alt="Filter" 
@@ -47,17 +58,31 @@ return(
             alt="Search" 
             className="search-icon" 
         />
-    </div>
+      </div>
+    ) : (
+      <div className="search-placeholder" />
+    )}
 
     <HeaderDropdown />
     <div className="nav-controls">
-        <div className="sign-in">
-            <a href="#" className="sign-in-link">Sign In</a>
-            <img 
-                src={require('../assets/images/site/ion_person.png')} 
-                alt="Sign In" 
-                className="profile-icon" 
-            />    
+        <div className="auth-chip">
+          <img 
+            src={require('../assets/images/site/ion_person.png')} 
+            alt="Profile" 
+            className="profile-icon" 
+          />
+          {user ? (
+            <>
+              <span className="greeting-text">Hi, {firstName}</span>
+              <button type="button" className="chip-action" onClick={handleSignOut}>
+                Sign out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/signin" className="chip-link">Sign In</Link>
+            </>
+          )}
         </div>
     </div>
     <Link to="/cart" aria-label="Shopping cart" style={{ marginLeft: 'auto' }}>
@@ -74,4 +99,3 @@ return(
 )
 }
 export default AppHeader;
-

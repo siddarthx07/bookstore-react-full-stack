@@ -18,7 +18,7 @@ echo -e "${GREEN}Step 1: Building React frontend...${NC}"
 cd client
 if [ ! -d "node_modules" ]; then
     echo "Installing npm dependencies..."
-    npm install
+    npm ci
 fi
 echo "Running npm build..."
 npm run build
@@ -26,8 +26,8 @@ cd ..
 
 # Step 2: Copy React build to Java webapp
 echo -e "${GREEN}Step 2: Copying React build to Java webapp directory...${NC}"
-rm -rf server/src/main/webapp/*
-cp -r client/build/* server/src/main/webapp/
+find server/src/main/webapp -mindepth 1 -maxdepth 1 ! -name 'WEB-INF' ! -name 'META-INF' -exec rm -rf {} +
+cp -r client/build/. server/src/main/webapp/
 
 # Step 3: Build Java backend
 echo -e "${GREEN}Step 3: Building Java backend with Gradle...${NC}"
@@ -37,10 +37,9 @@ chmod +x gradlew
 cd ..
 
 echo -e "${GREEN}✅ Build complete!${NC}"
-echo -e "${YELLOW}The WAR file is located at: server/build/libs/server-1.0-SNAPSHOT.war${NC}"
+echo -e "${YELLOW}The runnable JAR is located at: server/build/libs/server.jar${NC}"
 echo ""
 echo "📦 Ready for Railway deployment!"
 echo "   You can now deploy to Railway using:"
 echo "   1. Push to GitHub and deploy via Railway dashboard"
 echo "   2. Or use: railway up"
-

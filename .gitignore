@@ -55,5 +55,10 @@ coverage/
 build/
 dist/
 
+# Frontend bundle copied into server webapp during build
+server/src/main/webapp/*
+!server/src/main/webapp/WEB-INF/
+!server/src/main/webapp/META-INF/
+
 # README.md - excluding as requested
 README.md

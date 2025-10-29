@@ -5,12 +5,39 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  transform-origin: top center;
+  animation: confirmationPop 0.55s ease forwards;
+}
+
+.confirmation-container::before,
+.confirmation-container::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background-image:
+    radial-gradient(circle, #facc15 0px, #facc15 2px, transparent 3px),
+    radial-gradient(circle, #f87171 0px, #f87171 2px, transparent 3px),
+    radial-gradient(circle, #34d399 0px, #34d399 2px, transparent 3px);
+  background-size: 160px 160px;
+  background-position: 0 0, 40px 60px, 80px -40px;
+  opacity: 0.22;
+  pointer-events: none;
+  animation: confettiDrift 8s linear infinite;
+}
+
+.confirmation-container::after {
+  animation-direction: reverse;
+  animation-duration: 10s;
+  opacity: 0.18;
 }
 
 .confirmation-header {
   text-align: center;
   margin-bottom: 2rem;
   color: #2c3e50;
+  animation: confirmationHeaderGlow 1.2s ease forwards 0.25s;
 }
 
 .confirmation-message {
@@ -111,6 +138,45 @@
 
 .back-to-home-button:hover {
   background-color: #2980b9;
+}
+
+@keyframes confirmationPop {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes confettiDrift {
+  0% {
+    transform: translate3d(0, -10%, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(2%, 10%, 0) rotate(180deg);
+  }
+  100% {
+    transform: translate3d(-2%, -10%, 0) rotate(360deg);
+  }
+}
+
+@keyframes confirmationHeaderGlow {
+  0% {
+    text-shadow: none;
+  }
+  50% {
+    text-shadow: 0 0 18px rgba(52, 152, 219, 0.45);
+  }
+  100% {
+    text-shadow: 0 0 12px rgba(52, 152, 219, 0.28);
+  }
 }
 
 @media (max-width: 768px) {

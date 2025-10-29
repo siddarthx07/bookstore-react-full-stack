@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import CategoryNav from './CategoryNav';
 import CategoryBookListItem from './CategoryBookListItem';
 import '../assets/css/BookGrid.css';
@@ -10,6 +9,7 @@ import { Category } from '../contexts/CategoryContext';
 import { CartStore } from '../contexts/CartContext';
 import { useCategorySearch } from '../contexts/CategorySearchContext';
 import { BookItem } from '../types';
+import apiClient from '../apiClient';
 
 interface Book extends BookItem {
   categoryId: number;
@@ -36,7 +36,7 @@ function CategoryBookList() {
       try {
         setLoading(true);
         setError(null);
-        const result = await axios.get(`/SiddarthBookstoreReactTransact/api/categories/name/${id.toLowerCase()}/books`);
+        const result = await apiClient.get(`/categories/name/${id.toLowerCase()}/books`);
         if (mounted) {
           const fetchedBooks = result.data as Book[];
           setBooks(fetchedBooks);

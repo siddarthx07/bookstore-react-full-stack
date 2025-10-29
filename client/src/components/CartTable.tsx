@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CartStore } from '../contexts/CartContext';
 import { CartTypes } from '../reducers/CartReducer';
 import '../assets/css/CartTable.css';
 import { asDollarsAndCents } from '../utils';
+import { useAuth } from '../contexts/AuthContext';
 
 // Import book images or use a helper function to get them
 const getBookImage = (bookId: number, title: string) => {
@@ -27,6 +28,7 @@ const getBookImage = (bookId: number, title: string) => {
 function CartTable() {
     const { cart, dispatch, lastVisitedCategory } = useContext(CartStore);
     const navigate = useNavigate();
+    const { user } = useAuth();
     
     // Handle decrement quantity (remove one item)
     const handleRemoveFromCart = (id: number) => {
@@ -81,6 +83,17 @@ function CartTable() {
         navigate(`/categories/${lastVisitedCategory || 'fantasy'}`);
     };
 
+    const handleCheckout = () => {
+        if (cart.length === 0) {
+            return;
+        }
+        if (!user) {
+            navigate('/signin', { state: { from: '/checkout' } });
+        } else {
+            navigate('/checkout');
+        }
+    };
+
     return (
         <div className="cart-table-container">
             {cart.length === 0 ? (
@@ -111,9 +124,13 @@ function CartTable() {
                                 >
                                     <i className="fas fa-arrow-left"></i> Continue Shopping
                                 </button>
-                                <Link to="/checkout" className="checkout-button">
+                                <button
+                                    type="button"
+                                    className="checkout-button"
+                                    onClick={handleCheckout}
+                                >
                                     <i className="fas fa-shopping-cart"></i> Proceed to Checkout
-                                </Link>
+                                </button>
                                 <button 
                                     className="clear-cart-button"
                                     onClick={handleClearCart}

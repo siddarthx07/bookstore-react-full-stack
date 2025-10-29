@@ -1,11 +1,19 @@
+/* Book Card Link */
+.book-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 /* Special styling for homepage book cards */
 .best-sellers__grid .book-card {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   background-color: #fff;
   overflow: hidden;
   padding: 0;
+  cursor: pointer;
 }
 
 .best-sellers__grid .book-card:hover {

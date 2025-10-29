@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import axios from 'axios';
 import { CategoryItem } from '../types';
+import apiClient from '../apiClient';
 
 export const Category = createContext<CategoryItem[]>([]);
 Category.displayName = 'CategoryContext';
@@ -13,7 +13,7 @@ function CategoryContext({ children }: CategoryContextProps) {
   const [categories, setCategories] = useState<CategoryItem[]>([]);
 
   useEffect(() => {
-    axios.get('/SiddarthBookstoreReactTransact/api/categories')
+    apiClient.get('/categories')
       .then((result) => setCategories(result.data as CategoryItem[]))
       .catch(console.error);
   }, []);

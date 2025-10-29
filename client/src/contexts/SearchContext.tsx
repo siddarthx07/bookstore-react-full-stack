@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
 import { BookItem } from '../types';
-import axios from 'axios';
+import apiClient from '../apiClient';
 
 interface SearchContextType {
   searchTerm: string;
@@ -37,8 +37,8 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
       try {
         // Fetch books from each category to create a complete catalog
         const categories = ['romance', 'fantasy', 'thriller', 'horror'];
-        const booksPromises = categories.map(category => 
-          axios.get(`/SiddarthBookstoreReactTransact/api/categories/name/${category}/books`)
+        const booksPromises = categories.map(category =>
+          apiClient.get(`/categories/name/${category}/books`)
         );
         
         const responses = await Promise.all(booksPromises);

@@ -4,6 +4,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import business.BookstoreDbException.BookstoreConnectionDbException;
@@ -26,18 +28,14 @@ public class JdbcUtils {
     }
 
     private static DataSource getDataSource() {
-        // Check if we're in a Railway or cloud environment
-        String dbUrl = System.getenv("DATABASE_URL");
-        if (dbUrl != null && !dbUrl.isEmpty()) {
+        if (isManagedDatabaseConfigured()) {
             return getDataSourceFromEnvironment();
         }
-        
-        // Try JNDI lookup for traditional deployment
+
         try {
             return getDataSourceFromJndi(JDBC_BOOKSTORE);
         } catch (Exception e) {
-            // If JNDI fails, fall back to H2 in-memory database
-            System.out.println("JNDI lookup failed, falling back to H2 in-memory database");
+            System.out.println("JNDI lookup failed, falling back to environment configuration or H2: " + e.getMessage());
             return getDataSourceFromEnvironment();
         }
     }
@@ -55,62 +53,120 @@ public class JdbcUtils {
     private static DataSource getDataSourceFromEnvironment() {
         try {
             org.apache.commons.dbcp2.BasicDataSource ds = new org.apache.commons.dbcp2.BasicDataSource();
-            
-            String dbUrl = System.getenv("DATABASE_URL");
-            String dbUser = System.getenv("DATABASE_USER");
-            String dbPassword = System.getenv("DATABASE_PASSWORD");
-            
-            if (dbUrl == null || dbUrl.isEmpty()) {
-                // Use H2 in-memory database as fallback
+
+            DatabaseCredentials credentials = resolveDatabaseCredentials();
+
+            if (isBlank(credentials.url())) {
                 ds.setUrl("jdbc:h2:mem:bookstore;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL");
                 ds.setDriverClassName("org.h2.Driver");
                 ds.setUsername("sa");
                 ds.setPassword("");
             } else {
-                // Parse connection URL
-                if (dbUrl.startsWith("jdbc:mysql://")) {
-                    ds.setUrl(dbUrl);
-                    ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-                    if (dbUser != null) ds.setUsername(dbUser);
-                    if (dbPassword != null) ds.setPassword(dbPassword);
-                } else if (dbUrl.startsWith("mysql://")) {
-                    // Parse Railway format: mysql://user:pass@host:port/db
-                    String connectionString = dbUrl.replace("mysql://", "");
-                    int slashIndex = connectionString.indexOf('/');
-                    
-                    if (slashIndex != -1) {
-                        String credentials = connectionString.substring(0, slashIndex);
-                        String dbName = connectionString.substring(slashIndex + 1);
-                        
-                        int atIndex = credentials.indexOf('@');
-                        if (atIndex != -1) {
-                            String userPass = credentials.substring(0, atIndex);
-                            String hostPort = credentials.substring(atIndex + 1);
-                            
-                            int colonIndex = userPass.indexOf(':');
-                            if (colonIndex != -1) {
-                                String user = userPass.substring(0, colonIndex);
-                                String password = userPass.substring(colonIndex + 1);
-                                
-                                ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-                                ds.setUsername(user);
-                                ds.setPassword(password);
-                                ds.setUrl(String.format("jdbc:mysql://%s/%s?useSSL=true&serverTimezone=UTC&allowPublicKeyRetrieval=true", 
-                                        hostPort, dbName));
-                            }
-                        }
-                    }
+                ds.setUrl(credentials.url());
+                ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+                if (!isBlank(credentials.username())) {
+                    ds.setUsername(credentials.username());
+                }
+                if (!isBlank(credentials.password())) {
+                    ds.setPassword(credentials.password());
                 }
             }
-            
+
             ds.setInitialSize(2);
             ds.setMaxTotal(10);
             ds.setMaxIdle(5);
             ds.setMinIdle(1);
-            
+
             return ds;
         } catch (Exception e) {
             throw new IllegalArgumentException("Failed to create datasource from environment", e);
         }
     }
+
+    private static boolean isManagedDatabaseConfigured() {
+        return !isBlank(System.getenv("DATABASE_URL"))
+                || !isBlank(System.getenv("JDBC_DATABASE_URL"))
+                || !isBlank(System.getenv("MYSQL_URL"))
+                || !isBlank(System.getenv("MYSQLHOST"));
+    }
+
+    private static DatabaseCredentials resolveDatabaseCredentials() throws URISyntaxException {
+        String rawUrl = firstNonBlank(
+                System.getenv("DATABASE_URL"),
+                System.getenv("JDBC_DATABASE_URL"),
+                System.getenv("MYSQL_URL")
+        );
+
+        String username = firstNonBlank(
+                System.getenv("DATABASE_USER"),
+                System.getenv("DATABASE_USERNAME"),
+                System.getenv("JDBC_DATABASE_USERNAME"),
+                System.getenv("MYSQLUSER")
+        );
+
+        String password = firstNonBlank(
+                System.getenv("DATABASE_PASSWORD"),
+                System.getenv("JDBC_DATABASE_PASSWORD"),
+                System.getenv("MYSQLPASSWORD")
+        );
+
+        if (isBlank(rawUrl)) {
+            String host = System.getenv("MYSQLHOST");
+            String port = firstNonBlank(System.getenv("MYSQLPORT"), "3306");
+            String database = System.getenv("MYSQLDATABASE");
+
+            if (!isBlank(host) && !isBlank(database)) {
+                rawUrl = String.format("jdbc:mysql://%s:%s/%s?useSSL=true&serverTimezone=UTC&allowPublicKeyRetrieval=true", host, port, database);
+                if (isBlank(username)) {
+                    username = System.getenv("MYSQLUSER");
+                }
+                if (isBlank(password)) {
+                    password = System.getenv("MYSQLPASSWORD");
+                }
+            }
+        }
+
+        if (!isBlank(rawUrl) && rawUrl.startsWith("mysql://")) {
+            URI uri = new URI(rawUrl);
+            String host = uri.getHost();
+            int port = uri.getPort() <= 0 ? 3306 : uri.getPort();
+            String path = uri.getPath();
+            String database = path != null ? path.replaceFirst("^/", "") : "";
+
+            if (isBlank(username) || isBlank(password)) {
+                String userInfo = uri.getUserInfo();
+                if (!isBlank(userInfo)) {
+                    String[] parts = userInfo.split(":", 2);
+                    if (parts.length > 0 && isBlank(username)) {
+                        username = parts[0];
+                    }
+                    if (parts.length > 1 && isBlank(password)) {
+                        password = parts[1];
+                    }
+                }
+            }
+
+            rawUrl = String.format("jdbc:mysql://%s:%d/%s?useSSL=true&serverTimezone=UTC&allowPublicKeyRetrieval=true", host, port, database);
+        }
+
+        return new DatabaseCredentials(rawUrl, username, password);
+    }
+
+    private static String firstNonBlank(String... values) {
+        if (values == null) {
+            return null;
+        }
+        for (String value : values) {
+            if (!isBlank(value)) {
+                return value;
+            }
+        }
+        return null;
+    }
+
+    private static boolean isBlank(String value) {
+        return value == null || value.trim().isEmpty();
+    }
+
+    private record DatabaseCredentials(String url, String username, String password) {}
 }

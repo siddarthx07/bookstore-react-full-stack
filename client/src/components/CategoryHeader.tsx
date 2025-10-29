@@ -2,16 +2,17 @@ import React, { useContext, useState } from 'react';
 import "../assets/css/CategoryHeader.css";
 import "../assets/css/CategorySearch.css";
 import HeaderDropdown from './HeaderDropdown';
-import { Link } from 'react-router-dom';
-import { Category } from '../contexts/CategoryContext';
+import { Link, useNavigate } from 'react-router-dom';
 import { CartStore } from '../contexts/CartContext';
 import { useCategorySearch } from '../contexts/CategorySearchContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const CategoryHeader: React.FC = () => {
-  const categories = useContext(Category);
   const { cart } = useContext(CartStore);
   const { searchTerm, setSearchTerm, performSearch, originalBooks, setFilteredBooks, clearSearch } = useCategorySearch();
   const [inputValue, setInputValue] = useState(searchTerm);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   
   // Calculate total quantity of items in cart
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
@@ -27,6 +28,12 @@ const CategoryHeader: React.FC = () => {
   const handleClearSearch = () => {
     setInputValue('');
     clearSearch();
+  };
+  const firstName = user ? user.fullName.split(' ')[0] : '';
+
+  const handleSignOut = async () => {
+    await logout();
+    navigate('/');
   };
   return (
     <header className="header">
@@ -60,16 +67,25 @@ const CategoryHeader: React.FC = () => {
       </div>
       <HeaderDropdown />
       <div className="nav-controls">
-        <div className="user-profile">
-          <div className="profile-line">
-            <span className="greeting">Hello, Bandi</span>
-            <img src={require('../assets/images/site/ion_person.png')}  alt="Profile" className="profile-icon" />
+        {user ? (
+          <div className="auth-chip auth-chip--stacked">
+            <div className="chip-top">
+              <img src={require('../assets/images/site/ion_person.png')}  alt="Profile" className="profile-icon" />
+              <span className="greeting-text">Hi, {firstName}</span>
+            </div>
+            <button type="button" className="chip-action" onClick={handleSignOut}>
+              Sign out
+            </button>
           </div>
-          <div className="profile-line">
-            <a href="#" className="sign-out">Sign out</a>
-            <img src={require('../assets/images/site/uil_signout.png')}  alt="Sign out" className="profile-icon" />
+        ) : (
+          <div className="auth-chip auth-chip--stacked">
+            <div className="chip-top">
+              <img src={require('../assets/images/site/ion_person.png')}  alt="Profile" className="profile-icon" />
+              <Link to="/signin" className="chip-link">Sign In</Link>
+            </div>
+            <Link to="/signup" className="chip-subtle">Create account</Link>
           </div>
-        </div>
+        )}
       </div>
       <Link to="/cart" aria-label="Shopping cart" style={{ marginLeft: 'auto' }}>
           <div className="cart-container">
