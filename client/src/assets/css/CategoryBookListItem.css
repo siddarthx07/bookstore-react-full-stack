@@ -202,6 +202,29 @@
     animation-delay: 0.1s;
 }
 
+.book-card:nth-child(4n) {
+    animation-delay: 0.15s;
+}
+
+.book-card:nth-child(5n) {
+    animation-delay: 0.2s;
+}
+
+.book-card:nth-child(6n) {
+    animation-delay: 0.25s;
+}
+
+.book-card-link {
+    display: inline-block;
+}
+
+.book-card-link:focus-visible .book-card {
+    outline: 2px solid #0c64f3;
+    outline-offset: 6px;
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(12,100,243,0.25);
+}
+
 /* Responsive Design */
 @media (max-width: 991px) {
     .book-card {

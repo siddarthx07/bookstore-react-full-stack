@@ -11,6 +11,7 @@
   backdrop-filter: blur(6px);
   display: inline-flex;
   align-items: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.3s ease;
 }
 
 .category-trigger {
@@ -80,4 +81,12 @@
 .category-link:hover {
   border-color: rgba(255,255,255,0.28);
   box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+  transform: translateY(-2px);
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+}
+
+.category-link:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.7);
+  outline-offset: 4px;
+  transform: translateY(-2px);
 }

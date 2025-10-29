@@ -140,6 +140,17 @@
   }
 }
 
+@keyframes supportingFade {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Main Content Layout */
 .book-detail-content {
   display: flex;
@@ -452,6 +463,9 @@
   border-radius: 14px;
   background: rgba(12, 100, 243, 0.05);
   border: 1px solid rgba(12, 100, 243, 0.08);
+  opacity: 0;
+  transform: translateY(14px);
+  animation: supportingFade 0.45s ease forwards;
 }
 
 .supporting-icon {
@@ -469,6 +483,18 @@
   display: block;
   font-size: 0.82rem;
   color: #5f6a83;
+}
+
+.supporting-item:nth-child(1) {
+  animation-delay: 0.32s;
+}
+
+.supporting-item:nth-child(2) {
+  animation-delay: 0.42s;
+}
+
+.supporting-item:nth-child(3) {
+  animation-delay: 0.52s;
 }
 
 /* Description Section */

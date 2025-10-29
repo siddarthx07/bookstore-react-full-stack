@@ -4,6 +4,24 @@
     flex: 1;
 }
 
+.best-sellers__grid .book-card {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+    animation: bestsellerFadeUp 0.6s ease forwards;
+}
+
+.best-sellers__grid .book-card:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+.best-sellers__grid .book-card:nth-child(3) {
+    animation-delay: 0.16s;
+}
+
+.best-sellers__grid .book-card:nth-child(4) {
+    animation-delay: 0.24s;
+}
+
 
 /* Book Card */
 .book-card {
@@ -114,5 +132,16 @@
     .book-card {
         width: 100%;
         max-width: 200px;
+    }
+}
+
+@keyframes bestsellerFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
