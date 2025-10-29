@@ -1,5 +1,6 @@
 import '../assets/css/CategoryBookListItem.css';
 import React, { useContext, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { CartStore } from '../contexts/CartContext';
 import { CartTypes } from '../reducers/CartReducer';
 import { asDollarsAndCents } from '../utils';
@@ -118,7 +119,13 @@ function CategoryBookListItem({ bookId, title, author, price, rating, categoryId
           alt={`Cover of ${title}`} 
           className="book-card__image" 
         />
-        <a href="#" className="book-card__read-now">Read Now</a>
+        <Link
+          to={`/book/${bookId}`}
+          className="book-card__read-now"
+          aria-label={`View details for ${title}`}
+        >
+          View Details
+        </Link>
       </div>
       <div className="book-card__info">
         <h3 className="book-card__title">{title}</h3>
