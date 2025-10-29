@@ -28,6 +28,9 @@
   box-shadow: 0 24px 45px -28px rgba(15, 37, 73, 0.45);
   padding: 40px;
   backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(24px);
+  animation: detailCardEnter 0.6s ease-out forwards;
 }
 
 /* Breadcrumb Navigation */
@@ -87,6 +90,43 @@
   }
 }
 
+@keyframes detailCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes detailImageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes detailInfoEnter {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Main Content Layout */
 .book-detail-content {
   display: flex;
@@ -109,6 +149,9 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: detailImageEnter 0.7s ease forwards 0.1s;
 }
 
 .book-detail-image {
@@ -118,6 +161,12 @@
   object-fit: contain;
   border-radius: 18px;
   box-shadow: 0 24px 38px -32px rgba(17, 17, 17, 0.55);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.book-detail-image-container:hover .book-detail-image {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 30px 40px -28px rgba(17, 17, 17, 0.55);
 }
 
 .book-detail-badge {
@@ -149,6 +198,9 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: detailInfoEnter 0.6s ease forwards 0.18s;
 }
 
 .book-detail-header {
@@ -254,6 +306,15 @@
   border-radius: 18px;
   align-self: flex-start;
   box-shadow: 0 20px 34px -26px rgba(12, 100, 243, 0.85);
+  transform: translateY(0);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  opacity: 0;
+  animation: detailInfoEnter 0.6s ease forwards 0.22s;
+}
+
+.book-detail-price-pill:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 38px -28px rgba(12, 100, 243, 0.9);
 }
 
 .price-amount {
@@ -365,6 +426,9 @@
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 18px;
   margin-top: 8px;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: detailInfoEnter 0.6s ease forwards 0.26s;
 }
 
 .supporting-item {
@@ -402,6 +466,9 @@
   border-radius: 18px;
   border: 1px solid rgba(12, 100, 243, 0.08);
   box-shadow: 0 14px 30px -30px rgba(10, 38, 87, 0.6);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: detailInfoEnter 0.6s ease forwards 0.32s;
 }
 
 .section-title {

@@ -6,12 +6,16 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    opacity: 0;
+    transform: translateY(18px);
+    animation: bookCardEnter 0.45s ease forwards;
 }
 
 /* Book Card Hover Effect */
 .book-card:hover {
     transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Book Cover Image Container */
@@ -29,14 +33,20 @@
     aspect-ratio: 0.67;
     border-radius: 10px 10px 0 0;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.book-card__image-container:hover .book-card__image {
+    transform: translateY(-4px) scale(1.02);
 }
 
 /* Read Now Button (Initially Hidden) */
+
 .book-card__read-now {
     position: absolute;
     bottom: 10px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 0);
     background-color: #0c64f3;
     color: white;
     padding: 8px 16px;
@@ -46,12 +56,13 @@
     font: 600 14px "Inter", sans-serif;
     text-decoration: none;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* Show Read Now Button on Hover */
 .book-card__image-container:hover .book-card__read-now {
     opacity: 1;
+    transform: translate(-50%, -6px);
 }
 
 /* Book Information Section */
@@ -135,6 +146,25 @@
 .book-card__add-to-cart:hover {
     background-color: #1c3757;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+@keyframes bookCardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(26px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.book-card:nth-child(2n) {
+    animation-delay: 0.05s;
+}
+
+.book-card:nth-child(3n) {
+    animation-delay: 0.1s;
 }
 
 /* Responsive Design */
