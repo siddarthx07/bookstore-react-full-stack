@@ -74,7 +74,17 @@ type BookItemProps = {
 function CategoryBookListItem({ bookId, title, author, price, rating, categoryId }: BookItemProps) {
     const { dispatch } = useContext(CartStore);
     
-    const book = { bookId, title, author, price, rating, isPublic: true, categoryId };
+    const book = { 
+        bookId, 
+        title, 
+        author, 
+        description: '', 
+        price, 
+        rating, 
+        isPublic: true, 
+        isFeatured: false, 
+        categoryId 
+    };
     
     // Add a ref to track if we're currently processing a click
     const isAddingRef = useRef(false);

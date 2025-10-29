@@ -8,6 +8,7 @@ import business.book.BookDao;
 import business.order.OrderService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
@@ -119,9 +120,14 @@ public class ApiResource {
     @Path("orders")
     @Consumes(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
-    public OrderDetails placeOrder(OrderForm orderForm) {
+    public OrderDetails placeOrder(OrderForm orderForm, @Context HttpServletRequest request) {
         System.out.println("===== PROCESSING ORDER =====");
         try {
+            HttpSession session = request.getSession(false);
+            if (session == null || session.getAttribute(AuthResource.SESSION_USER_ID) == null) {
+                throw new ApiException.ValidationFailure("Please sign in before placing an order");
+            }
+            
             // First validate the input
             System.out.println("Checking if orderForm is null: " + (orderForm == null));
             if (orderForm == null) {

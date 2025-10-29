@@ -9,11 +9,12 @@ export interface BookItem {
   bookId: number;
   title: string;
   author: string;
+  description: string;
   price: number;
   isPublic: boolean;
   rating: number;
   categoryId: number;
-  description?: string; // Optional description field for search
+  isFeatured: boolean;
 }
 
 export interface CategoryItem {

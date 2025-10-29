@@ -26,10 +26,11 @@ public class DatabaseInitializer implements ServletContextListener {
         try (Connection connection = JdbcUtils.getConnection()) {
             // Check if tables already exist
             boolean tablesExist = checkTablesExist(connection);
-            
+
+            System.out.println("Ensuring database schema is up to date...");
+            createTables(connection);
+
             if (!tablesExist) {
-                System.out.println("Tables not found, creating database schema...");
-                createTables(connection);
                 insertInitialData(connection);
                 System.out.println("Database schema and initial data created successfully");
             } else {
@@ -60,6 +61,16 @@ public class DatabaseInitializer implements ServletContextListener {
                 `cc_number` VARCHAR(19) NOT NULL,
                 `cc_exp_date` DATE NOT NULL,
                 PRIMARY KEY (`customer_id`)
+            );
+            
+            CREATE TABLE IF NOT EXISTS `account` (
+                `account_id` INT UNSIGNED AUTO_INCREMENT,
+                `full_name` VARCHAR(100) NOT NULL,
+                `email` VARCHAR(255) NOT NULL,
+                `password_hash` VARCHAR(255) NOT NULL,
+                `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (`account_id`),
+                UNIQUE KEY `uk_account_email` (`email`)
             );
             
             CREATE TABLE IF NOT EXISTS `category` (
@@ -166,4 +177,3 @@ public class DatabaseInitializer implements ServletContextListener {
         // Cleanup if needed
     }
 }
-

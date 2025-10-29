@@ -12,6 +12,8 @@ import business.order.OrderDao;
 import business.order.OrderDaoJdbc;
 import business.order.OrderService;
 import business.order.DefaultOrderService;
+import business.user.AccountDao;
+import business.user.AccountDaoJdbc;
 
 public class ApplicationContext {
 
@@ -23,6 +25,7 @@ public class ApplicationContext {
     private final OrderDao orderDao;
     private final LineItemDao lineItemDao;
     private final OrderService orderService;
+    private final AccountDao accountDao;
 
     private ApplicationContext() {
         this.categoryDao = new CategoryDaoJdbc();
@@ -30,6 +33,7 @@ public class ApplicationContext {
         this.customerDao = new CustomerDaoJdbc();
         this.orderDao = new OrderDaoJdbc();
         this.lineItemDao = new LineItemDaoJdbc();
+        this.accountDao = new AccountDaoJdbc();
         orderService = new DefaultOrderService();
         
         // Wire in all the DAOs to the OrderService
@@ -65,5 +69,9 @@ public class ApplicationContext {
     
     public OrderService getOrderService() {
         return orderService;
+    }
+
+    public AccountDao getAccountDao() {
+        return accountDao;
     }
 }

@@ -170,31 +170,10 @@
   .dropdown-menu a:hover {
     background-color: #2c3b4f;
   }
-  .user-profile {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  .profile-line {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #ffffff;
-  }
-  .greeting {
-    font-size: 18px;
-    font-weight: 700;
-  }
-  .sign-out {
-    font-size: 16px;
-    font-weight: 700;
-    color: #ffffff;
-    text-decoration: none;
-  }
-  .profile-icon {
-    width: 20px;
-    height: 20px;
-  }
+.profile-icon {
+  width: 22px;
+  height: 22px;
+}
   .user-info {
     border-radius: 20px;
     background-color: #1e2938;
@@ -259,3 +238,7 @@
     }
   }
   
+
+  .cart-link {
+    margin-left: 24px;
+  }

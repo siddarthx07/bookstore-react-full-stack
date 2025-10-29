@@ -3,6 +3,7 @@ import '../assets/css/BookCard.css';
 import '../assets/css/BookGrid.css';
 import '../assets/css/HomeBookCard.css';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { BookItem } from '../types';
 import apiClient from '../apiClient';
 
@@ -73,18 +74,20 @@ function HomeCategoryList() {
   return (
     <div className="best-sellers__grid">
       {books && books.slice(0, 4).map((book) => (
-        <article className="book-card" key={book.bookId}>
-          <div className="book-card__image-container">
-            <img 
-              src={bookImages[book.title.toLowerCase().replace(/\s+/g, '')] || `../assets/images/books/${book.title.toLowerCase().replace(/\s+/g, '')}.jpg`}
-              alt={`Cover of ${book.title}`} 
-              className="book-card__image" 
-            />
-          </div>
-          <div className="book-card__info">
-            <h3 className="book-card__title">{book.title}</h3>
-          </div>
-        </article>
+        <Link to={`/book/${book.bookId}`} key={book.bookId} className="book-card-link">
+          <article className="book-card">
+            <div className="book-card__image-container">
+              <img 
+                src={bookImages[book.title.toLowerCase().replace(/\s+/g, '')] || `../assets/images/books/${book.title.toLowerCase().replace(/\s+/g, '')}.jpg`}
+                alt={`Cover of ${book.title}`} 
+                className="book-card__image" 
+              />
+            </div>
+            <div className="book-card__info">
+              <h3 className="book-card__title">{book.title}</h3>
+            </div>
+          </article>
+        </Link>
       ))}
     </div>
   );
