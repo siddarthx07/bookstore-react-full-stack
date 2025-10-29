@@ -6,28 +6,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BookItem } from '../types';
 import apiClient from '../apiClient';
-
-// Pre-import book images
-import twistedLove from '../assets/images/books/twistedlove.png';
-import theFriendZone from '../assets/images/books/thefriendzone.png';
-import remindersOfHim from '../assets/images/books/remindersofhim.png';
-import november9 from '../assets/images/books/november9.png';
-import kingOfWrath from '../assets/images/books/kingofwrath.png';
-import twistedLies from '../assets/images/books/twistedlies.png';
-import yourFault from '../assets/images/books/yourfault.png';
-import findingPerfect from '../assets/images/books/findingperfect.png';
-
-const bookImages: { [key: string]: string } = {
-  'twistedlove': twistedLove,
-  'thefriendzone': theFriendZone,
-  'remindersofhim': remindersOfHim,
-  'november9': november9,
-  'kingofwrath': kingOfWrath,
-  'twistedlies': twistedLies,
-  'yourfault': yourFault,
-  'findingperfect': findingPerfect
-};
-
+import bookImages from '../assets/bookImages';
+import daydream from '../assets/images/books/daydream.png';
 
 
 function HomeCategoryList() {
@@ -78,7 +58,7 @@ function HomeCategoryList() {
           <article className="book-card">
             <div className="book-card__image-container">
               <img 
-                src={bookImages[book.title.toLowerCase().replace(/\s+/g, '')] || `../assets/images/books/${book.title.toLowerCase().replace(/\s+/g, '')}.jpg`}
+                src={bookImages[book.title.toLowerCase().replace(/[^a-z0-9]/g, '')] ?? daydream}
                 alt={`Cover of ${book.title}`} 
                 className="book-card__image" 
               />

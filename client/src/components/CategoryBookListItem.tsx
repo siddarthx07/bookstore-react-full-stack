@@ -4,63 +4,8 @@ import { Link } from 'react-router-dom';
 import { CartStore } from '../contexts/CartContext';
 import { CartTypes } from '../reducers/CartReducer';
 import { asDollarsAndCents } from '../utils';
-
-// Pre-import book images
-import acourtofthornsandroses from '../assets/images/books/acourtofthornsandroses.jpg';
-import beforeigotosleep from '../assets/images/books/beforeigotosleep.jpg';
-import birdbox from '../assets/images/books/birdbox.jpg';
+import bookImages from '../assets/bookImages';
 import daydream from '../assets/images/books/daydream.png';
-import findingperfect from '../assets/images/books/findingperfect.png';
-import houseofleaves from '../assets/images/books/houseofleaves.jpg';
-import kingofwrath from '../assets/images/books/kingofwrath.png';
-import mexicangothic from '../assets/images/books/mexicangothic.jpg';
-import november9 from '../assets/images/books/november9.png';
-import reminders from '../assets/images/books/reminders.png';
-import remindersofhim from '../assets/images/books/remindersofhim.png';
-import shadowandbone from '../assets/images/books/shadowandbone.jpg';
-import thechain from '../assets/images/books/thechain.jpg';
-import theexorcist from '../assets/images/books/theexorcist.jpg';
-import thefriendzone from '../assets/images/books/thefriendzone.png';
-import thegirlwiththedragontattoo from '../assets/images/books/thegirlwiththedragontattoo.jpg';
-import thenameofthewind from '../assets/images/books/thenameofthewind.jpg';
-import theprioryoftheorangetree from '../assets/images/books/theprioryoftheorangetree.jpg';
-import theshining from '../assets/images/books/theshining.jpg';
-import thesilentpatient from '../assets/images/books/thesilentpatient.jpg';
-import thewayofkings from '../assets/images/books/thewayofkings.jpg';
-import thewomaninthewindow from '../assets/images/books/thewomaninthewindow.jpg';
-import twistedlies from '../assets/images/books/twistedlies.png';
-import twistedlove from '../assets/images/books/twistedlove.png';
-import verity from '../assets/images/books/verity.png';
-import yourfault from '../assets/images/books/yourfault.png';
-
-const bookImages: { [key: string]: string } = {
-  'acourtofthornsandroses': acourtofthornsandroses,
-  'beforeigotosleep': beforeigotosleep,
-  'birdbox': birdbox,
-  'daydream': daydream,
-  'findingperfect': findingperfect,
-  'houseofleaves': houseofleaves,
-  'kingofwrath': kingofwrath,
-  'mexicangothic': mexicangothic,
-  'november9': november9,
-  'reminders': reminders,
-  'remindersofhim': remindersofhim,
-  'shadowandbone': shadowandbone,
-  'thechain': thechain,
-  'theexorcist': theexorcist,
-  'thefriendzone': thefriendzone,
-  'thegirlwiththedragontattoo': thegirlwiththedragontattoo,
-  'thenameofthewind': thenameofthewind,
-  'theprioryoftheorangetree': theprioryoftheorangetree,
-  'theshining': theshining,
-  'thesilentpatient': thesilentpatient,
-  'thewayofkings': thewayofkings,
-  'thewomaninthewindow': thewomaninthewindow,
-  'twistedlies': twistedlies,
-  'twistedlove': twistedlove,
-  'verity': verity,
-  'yourfault': yourfault
-};
 
 type BookItemProps = {
   bookId: number;
@@ -122,7 +67,7 @@ function CategoryBookListItem({ bookId, title, author, price, rating, categoryId
             clearTimeout(toastTimeoutRef.current);
         }
     }, []);
-  const imageKey = title.toLowerCase().replace(/\s+/g, '');
+  const imageKey = title.toLowerCase().replace(/[^a-z0-9]/g, '');
   const rawSrc = bookImages[imageKey] ?? daydream;
   const imageSrc = rawSrc
     ? rawSrc.startsWith('/') ? rawSrc : `/${rawSrc.replace(/^\//, '')}`

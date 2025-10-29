@@ -7,27 +7,8 @@ import { CartTypes } from '../reducers/CartReducer';
 import { asDollarsAndCents } from '../utils';
 import '../assets/css/BookDetail.css';
 import { Category as CategoryContext } from '../contexts/CategoryContext';
-
-// Pre-import book images
-import twistedLove from '../assets/images/books/twistedlove.png';
-import theFriendZone from '../assets/images/books/thefriendzone.png';
-import remindersOfHim from '../assets/images/books/remindersofhim.png';
-import november9 from '../assets/images/books/november9.png';
-import kingOfWrath from '../assets/images/books/kingofwrath.png';
-import twistedLies from '../assets/images/books/twistedlies.png';
-import yourFault from '../assets/images/books/yourfault.png';
-import findingPerfect from '../assets/images/books/findingperfect.png';
-
-const bookImages: { [key: string]: string } = {
-  'twistedlove': twistedLove,
-  'thefriendzone': theFriendZone,
-  'remindersofhim': remindersOfHim,
-  'november9': november9,
-  'kingofwrath': kingOfWrath,
-  'twistedlies': twistedLies,
-  'yourfault': yourFault,
-  'findingperfect': findingPerfect
-};
+import bookImages from '../assets/bookImages';
+import daydream from '../assets/images/books/daydream.png';
 
 function BookDetail() {
   const { bookId } = useParams<{ bookId: string }>();
@@ -100,8 +81,8 @@ function BookDetail() {
     );
   }
 
-  const imageKey = book.title.toLowerCase().replace(/\s+/g, '');
-  const bookImage = bookImages[imageKey] ?? 'https://placehold.co/360x540?text=StorySpark';
+  const imageKey = book.title.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const bookImage = bookImages[imageKey] ?? daydream;
   const categoryMatch = categories.find((category) => category.categoryId === book.categoryId);
   const categoryName = categoryMatch?.name ?? 'General';
 
