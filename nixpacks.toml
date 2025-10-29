@@ -9,10 +9,8 @@ cmds = [
 [phases.build]
 cmds = [
   "cd client && npm run build",
-  "find server/src/main/webapp -mindepth 1 -maxdepth 1 ! -name 'WEB-INF' ! -name 'META-INF' -exec rm -rf {} +",
-  "cp -r client/build/. server/src/main/webapp/",
   "cd server && chmod +x gradlew && ./gradlew clean build -x test"
 ]
 
 [start]
-cmd = "java -jar server/build/libs/server.jar"
+cmd = "bash -lc 'find server/src/main/webapp -mindepth 1 -maxdepth 1 ! -name \"WEB-INF\" ! -name \"META-INF\" -exec rm -rf {} + && cp -r client/build/. server/src/main/webapp/ && java -jar server/build/libs/server.jar'"
