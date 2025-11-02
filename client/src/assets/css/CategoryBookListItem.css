@@ -152,9 +152,9 @@
 
 .book-card__toast {
     position: absolute;
-    top: 0;
+    top: -16px;
     left: 50%;
-    transform: translate(-50%, -130%);
+    transform: translateX(-50%);
     background: linear-gradient(135deg, #0c64f3, #315bff);
     color: #fff;
     padding: 6px 16px;
@@ -171,19 +171,19 @@
 @keyframes toastPop {
     0% {
         opacity: 0;
-        transform: translate(-50%, -150%) scale(0.92);
+        transform: translate(-50%, -10px) scale(0.92);
     }
     12% {
         opacity: 1;
-        transform: translate(-50%, -130%) scale(1.02);
+        transform: translate(-50%, -6px) scale(1.02);
     }
     85% {
         opacity: 1;
-        transform: translate(-50%, -130%) scale(1);
+        transform: translate(-50%, -6px) scale(1);
     }
     100% {
         opacity: 0;
-        transform: translate(-50%, -150%) scale(0.95);
+        transform: translate(-50%, -10px) scale(0.95);
     }
 }
 
