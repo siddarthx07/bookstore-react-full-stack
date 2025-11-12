@@ -319,6 +319,7 @@
     }
     .logo-container {
       gap: 8px !important;
+      margin-right: auto !important;
     }
     .logo-link {
       gap: 8px !important;
@@ -327,16 +328,14 @@
       display: none;
     }
     .search-container {
-      width: 70%;
+      width: 60%;
       margin-left: 0;
     }
     .search-placeholder {
       display: none;
     }
     .category-link {
-      margin-left: 10px;
-      font-size: 14px;
-      padding: 6px 12px;
+      display: none;
     }
     .cart-icon {
       width: 32px !important;
@@ -351,6 +350,6 @@
       right: -5px !important;
     }
     .cart-link {
-      margin-left: 10px !important;
+      margin-left: 8px !important;
     }
   }

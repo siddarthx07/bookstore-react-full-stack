@@ -19,6 +19,9 @@
     @media (max-width: 640px) {
       .book-grid {
         grid-template-columns: 1fr;
-        padding: 40px;
+        column-gap: 0;
+        row-gap: 30px;
+        padding: 20px 15px;
+        justify-items: center;
       }
     }

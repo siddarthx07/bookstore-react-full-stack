@@ -90,12 +90,89 @@
   }
   
   @media (max-width: 640px) {
+    .header {
+      height: 60px;
+      padding: 0 10px;
+      justify-content: flex-start;
+    }
+    
+    .logo-container {
+      gap: 8px;
+      margin-right: auto;
+    }
+    
+    .logo-link {
+      gap: 8px;
+    }
+    
+    .logo-image {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .logo {
+      height: 40px;
+    }
+    
+    .logo-letter {
+      font-size: 40px;
+    }
+    
+    .logo-text-container {
+      height: 35px;
+    }
+    
+    .logo-text-top,
+    .logo-text-bottom {
+      font-size: 11px;
+    }
+    
+    .logo-text-top {
+      transform: translateY(8px);
+    }
+    
+    .logo-text-bottom {
+      transform: translateY(-8px);
+    }
+    
     .nav-controls {
       display: none;
     }
+    
+    .search-container {
+      width: 55%;
+      margin-left: 0;
+    }
+    
+    .search-input {
+      font-size: 14px;
+    }
+    
+    .search-icon,
+    .filter-icon {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .category-link {
+      display: none;
+    }
+    
     .cart-icon {
       width: 32px;
       height: 32px;
+    }
+    
+    .cart-badge {
+      width: 18px;
+      height: 18px;
+      font-size: 13px;
+      top: -5px;
+      right: -5px;
+    }
+    
+    .cart-link {
+      margin-left: 8px;
     }
   }
   .search-container {

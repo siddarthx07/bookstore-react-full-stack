@@ -143,6 +143,7 @@ html, body {
   .header {
     height: 60px;
     padding: 0 10px;
+    justify-content: flex-start;
   }
   
   .logo-image {
@@ -177,6 +178,7 @@ html, body {
   
   .logo-container {
     gap: 8px;
+    margin-right: auto;
   }
   
   .logo-link {
