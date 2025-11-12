@@ -55,6 +55,44 @@ html, body {
   object-fit: contain;
 }
 
+.logo {
+  display: flex;
+  position: relative;
+  height: 80px;
+  align-items: center;
+}
+
+.logo-letter {
+  font-size: 80px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.logo-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 75px;
+  padding: 0;
+}
+
+.logo-text-top,
+.logo-text-bottom {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.logo-text-top {
+  transform: translateY(15px);
+}
+
+.logo-text-bottom {
+  transform: translateY(-15px);
+}
+
 .nav-controls {
   display: flex;
   align-items: center;
@@ -64,9 +102,89 @@ html, body {
 }
 
 /* Responsive Design */
+@media (max-width: 991px) {
+  .header {
+    height: 80px;
+    padding: 0 20px;
+  }
+  
+  .logo-image {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .logo {
+    height: 55px;
+  }
+  
+  .logo-letter {
+    font-size: 55px;
+  }
+  
+  .logo-text-container {
+    height: 50px;
+  }
+  
+  .logo-text-top,
+  .logo-text-bottom {
+    font-size: 15px;
+  }
+  
+  .logo-text-top {
+    transform: translateY(12px);
+  }
+  
+  .logo-text-bottom {
+    transform: translateY(-12px);
+  }
+}
+
 @media (max-width: 640px) {
+  .header {
+    height: 60px;
+    padding: 0 10px;
+  }
+  
+  .logo-image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .logo {
+    height: 40px;
+  }
+  
+  .logo-letter {
+    font-size: 40px;
+  }
+  
+  .logo-text-container {
+    height: 35px;
+  }
+  
+  .logo-text-top,
+  .logo-text-bottom {
+    font-size: 11px;
+  }
+  
+  .logo-text-top {
+    transform: translateY(8px);
+  }
+  
+  .logo-text-bottom {
+    transform: translateY(-8px);
+  }
+  
+  .logo-container {
+    gap: 8px;
+  }
+  
+  .logo-link {
+    gap: 8px;
+  }
+  
   .nav-controls {
-      display: none;
+    display: none;
   }
 }
 
