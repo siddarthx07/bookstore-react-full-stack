@@ -196,8 +196,9 @@
         background-repeat: no-repeat;
         position: relative;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: center;
+        padding-bottom: 20px;
     }
     
     .hero::before {
@@ -221,9 +222,15 @@
         z-index: 2;
         text-align: center;
         width: 90%;
+        max-width: 320px;
         top: auto;
         left: auto;
         transform: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 15px;
     }
     
     .hero-content h1 {
@@ -236,13 +243,14 @@
         font-weight: 700;
         line-height: 1.4;
         letter-spacing: 0.5px;
+        width: 100%;
+        order: 1;
     }
     
     .shop-now-btn {
         font-size: 1rem;
-        padding: 0.6rem 1.3rem;
-        margin-left: 0;
-        margin-top: 25px;
+        padding: 0.75rem 2rem;
+        margin: 0;
         border-radius: 8px;
         background: #c11212fb;
         color: white;
@@ -251,6 +259,16 @@
         border: none;
         cursor: pointer;
         display: inline-block;
+        width: auto;
+        min-width: 140px;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        order: 2;
+        align-self: center;
+    }
+    
+    .shop-now-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(193, 18, 18, 0.7);
     }
     
     .best-sellers {

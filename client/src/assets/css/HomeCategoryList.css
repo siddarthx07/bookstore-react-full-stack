@@ -127,43 +127,22 @@
 @media (max-width: 640px) {
     .best-sellers {
         padding: 20px 0;
+        overflow: visible;
     }
     
     .best-sellers__grid {
-        flex-direction: row;
+        flex-direction: column;
         gap: 20px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
+        overflow: visible;
         padding: 10px 15px;
         justify-content: flex-start;
         flex-wrap: nowrap;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
-    }
-    
-    .best-sellers__grid::-webkit-scrollbar {
-        height: 6px;
-    }
-    
-    .best-sellers__grid::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.05);
-        border-radius: 10px;
-    }
-    
-    .best-sellers__grid::-webkit-scrollbar-thumb {
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-    }
-    
-    .best-sellers__grid::-webkit-scrollbar-thumb:hover {
-        background: rgba(0, 0, 0, 0.5);
     }
     
     .book-card {
-        width: 160px;
-        min-width: 160px;
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
         flex-shrink: 0;
     }
 }
