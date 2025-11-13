@@ -71,3 +71,56 @@
   line-height: 1.4;
   margin-top: 10px;
 }
+
+/* Responsive overrides (kept here so they load last) */
+@media (max-width: 991px) {
+  .best-sellers {
+    padding: 30px 24px;
+  }
+
+  .best-sellers__content {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .best-sellers__title {
+    width: 100%;
+    max-width: 420px;
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .best-sellers {
+    padding: 20px 16px;
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 10px;
+  }
+
+  .best-sellers__content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .best-sellers__title {
+    font-size: 20px;
+    padding: 16px;
+  }
+
+  .best-sellers__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .best-sellers__grid .book-card {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+}
